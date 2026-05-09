@@ -16,13 +16,17 @@ export default function Login() {
     });
 
     const [error, setError] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
+    
+
     const navigate = useNavigate();
 
     useEffect(() => {
         if (data?.status) {
-            navigate("/");
+            navigate("")
         }
     }, [data]);
+
 
     const validate = () => {
         let error = {};
@@ -57,6 +61,7 @@ export default function Login() {
             }
         }
     };
+   
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -71,7 +76,11 @@ export default function Login() {
 
     return (
         <div className="container">
-            <LoginCom handleSubmit={handleSubmit} apiError={apiError} user={user} handleChange={handleChange} error={error} loading={loading} />
+            <LoginCom handleSubmit={handleSubmit} apiError={apiError} user={user} handleChange={handleChange} error={error}
+                loading={loading}
+                showPassword={showPassword}
+                setShowPassword={setShowPassword}
+            />
         </div>
     );
 }

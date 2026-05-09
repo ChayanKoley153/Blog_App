@@ -17,10 +17,13 @@ export default function Register() {
         confirmPassword: "",
         address: ""
     });
-
     const [profileImage, setProfileImage] = useState(null);
     const [error, setError] = useState({});
     const [userId, setUserId] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [preview, setPreview] = useState(null);
+
 
     const navigate = useNavigate();
 
@@ -119,9 +122,15 @@ export default function Register() {
         const file = e.target.files[0];
         setProfileImage(file);
 
+        if (file) {
+            setPreview(URL.createObjectURL(file));
+        }
+
         setError(prev => ({
             ...prev,
-            profileImage: file ? "" : "profile image is required"
+            profileImage: file
+                ? ""
+                : "profile image is required"
         }));
     };
 
@@ -146,7 +155,14 @@ export default function Register() {
 
     return (
         <div className="container">
-            <RegisterCom handleSubmit={handleSubmit} apiError={apiError} user={user} handleChange={handleChange} error={error} loading={loading} handleImageChange={handleImageChange} />
+            <RegisterCom handleSubmit={handleSubmit} apiError={apiError} user={user} handleChange={handleChange} error={error} loading={loading} handleImageChange={handleImageChange}
+                showPassword={showPassword}
+                setShowPassword={setShowPassword}
+                showConfirmPassword={showConfirmPassword}
+                setShowConfirmPassword={setShowConfirmPassword}
+                preview={preview}
+                setPreview={setPreview}
+            />
         </div>
     );
 }

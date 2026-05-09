@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Component, lazy, Suspense } from 'react';
 import FormLoader from './components/loaderCom/loadercom';
 import { Toaster } from "sonner";
+import PostAdd from './pages/crud/post_add/postAdd';
 
 
 
@@ -27,6 +28,14 @@ function App() {
     }
   ]
 
+  const privateRoute = [
+    {
+      path: '/product/add',
+      component: <PostAdd/>
+    }
+    
+  ]
+
   return (
     <>
       <Toaster position="top-right" richColors />
@@ -37,6 +46,9 @@ function App() {
               return <Route path={item.path} element={item.component} />
             })}
 
+            {privateRoute.map((item) => {
+              return <Route path={item.path} element={item.component} />
+            })}
           </Routes>
         </BrowserRouter>
       </Suspense>

@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-export const LoginCom = ({ handleSubmit, apiError, user, handleChange, error, loading }) => {
+
+export const LoginCom = ({ handleSubmit, apiError, user, handleChange, error, loading, showPassword, setShowPassword }) => {
     return (
         <>
             <form className="form" onSubmit={handleSubmit}>
@@ -19,16 +21,33 @@ export const LoginCom = ({ handleSubmit, apiError, user, handleChange, error, lo
                 </div>
 
                 <div className="form-group">
-                    <input
-                        className="input"
-                        type="password"
-                        name="password"
-                        value={user.password}
-                        onChange={handleChange}
-                        placeholder="Enter password"
-                    />
-                    <span className="error">{error.password}</span>
+                    <div className="password-box">
+                        <input
+                            className="input"
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            value={user.password}
+                            onChange={handleChange}
+                            placeholder="Enter password"
+                        />
+                        <button
+                            type="button"
+                            className="toggle-btn"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {
+                                showPassword
+                                    ? <FaEyeSlash />
+                                    : <FaEye />
+                            }
+                        </button>
+                    </div>
+
+                    <span className="error">
+                        {error.password}
+                    </span>
                 </div>
+
 
                 <button className="btn">
                     {loading ? "Loading..." : "Login"}

@@ -1,83 +1,163 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-export default function RegisterCom({ handleSubmit, apiError, user, handleChange, error, loading, handleImageChange }) {
+export default function RegisterCom({
+    handleSubmit,
+    apiError,
+    user,
+    handleChange,
+    error,
+    loading,
+    handleImageChange,
+    showPassword,
+    setShowPassword,
+    showConfirmPassword,
+    setShowConfirmPassword,
+    preview,
+}) {
+
     return (
-        <>
-            <form className="form" onSubmit={handleSubmit}>
-                <h2>Register</h2>
-                <div className="form-group">
-                    <input
-                        className="input"
-                        name="name"
-                        value={user.name}
-                        onChange={handleChange}
-                        placeholder="Enter name"
-                    />
-                    <span className="error">{error.name}</span>
-                </div>
+        <form className="form" onSubmit={handleSubmit}>
+            <h2>Register</h2>
+            <div className="form-group">
+                <input
+                    className="input"
+                    name="name"
+                    value={user.name}
+                    onChange={handleChange}
+                    placeholder="Enter name"
+                />
 
-                <div className="form-group">
-                    <input
-                        className="input"
-                        name="email"
-                        value={user.email}
-                        onChange={handleChange}
-                        placeholder="Enter email"
-                    />
-                    <span className="error">{error.email}</span>
-                </div>
+                <span className="error">
+                    {error.name}
+                </span>
+            </div>
 
-                <div className="form-group">
+            <div className="form-group">
+                <input
+                    className="input"
+                    type="email"
+                    name="email"
+                    value={user.email}
+                    onChange={handleChange}
+                    placeholder="Enter email"
+                />
+
+                <span className="error">
+                    {error.email}
+                </span>
+            </div>
+
+            <div className="form-group">
+                <div className="password-box">
                     <input
                         className="input"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         name="password"
                         value={user.password}
                         onChange={handleChange}
                         placeholder="Enter password"
                     />
-                    <span className="error">{error.password}</span>
+                    <button
+                        type="button"
+                        className="toggle-btn"
+                        onClick={() => setShowPassword(!showPassword)}
+                    >
+                        {
+                            showPassword
+                                ? <FaEyeSlash />
+                                : <FaEye />
+                        }
+                    </button>
                 </div>
 
-                <div className="form-group">
+                <span className="error">
+                    {error.password}
+                </span>
+            </div>
+
+            <div className="form-group">
+                <div className="password-box">
                     <input
                         className="input"
-                        type="password"
+                        type={showConfirmPassword ? "text" : "password"}
                         name="confirmPassword"
                         value={user.confirmPassword}
                         onChange={handleChange}
                         placeholder="Confirm password"
                     />
-                    <span className="error">{error.confirmPassword}</span>
-                </div>
+                    <button
+                        type="button"
+                        className="toggle-btn"
+                        onClick={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                        }
+                    >
+                        {
+                            showConfirmPassword
+                                ? <FaEyeSlash />
+                                : <FaEye />
+                        }
+                    </button>
 
-                <div className="form-group">
-                    <textarea
-                        className="input"
-                        name="address"
-                        value={user.address}
-                        onChange={handleChange}
-                        placeholder="Enter address"
+                </div>
+                <span className="error">
+                    {error.confirmPassword}
+                </span>
+
+            </div>
+
+            <div className="form-group">
+                <textarea
+                    className="input"
+                    name="address"
+                    value={user.address}
+                    onChange={handleChange}
+                    placeholder="Enter address"
+                />
+
+                <span className="error">
+                    {error.address}
+                </span>
+            </div>
+
+            <div className="form-group">
+                <input
+                    className="input input-file"
+                    type="file"
+                    onChange={handleImageChange}
+                />
+
+                <span className="error">
+                    {error.profileImage}
+                </span>
+            </div>
+
+            
+            {/* image preview  */}
+            {
+                preview && (
+                    <img
+                        src={preview}
+                        alt="Preview"
+                        className="preview-image"
                     />
-                    <span className="error">{error.address}</span>
-                </div>
+                )
+            }
 
-                <div className="form-group">
-                    <input
-                        className="input input-file"
-                        type="file"
-                        onChange={handleImageChange}
-                    />
-                    <span className="error">{error.profileImage}</span>
-                </div>
+            <button
+                className="btn"
+                disabled={loading}
+            >
+                {loading ? "Loading..." : "Register"}
+            </button>
 
-                <button className="btn">
-                    {loading ? "Loading..." : "Register"}
-                </button>
+            <p>
+                Already have an account?
+                <Link to="/auth/login"> Login</Link>
+            </p>
 
-                <p>Already have an account? <Link to="/auth/login">Login</Link></p>
-            </form>
-        </>
+        </form>
     )
 }
