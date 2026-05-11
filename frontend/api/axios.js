@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   function (config) {
     const accesstoken = getCookie("accesstoken");
-    console.log(accesstoken, "accesstoken");
+    // console.log(accesstoken, "accesstoken");
     if (accesstoken) {
       config.headers["x-access-token"] = accesstoken 
     }

@@ -7,7 +7,7 @@ export const useAdd = (url) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const postData = async (payload) => {
+    const AddData = async (payload) => {
         setLoading(true);
         setError(null);
 
@@ -15,6 +15,7 @@ export const useAdd = (url) => {
             const response = await axiosInstance.post(url, payload);
             setData(response.data);
             toast.success(response.data.message);
+            return response.data;
         } catch (err) {
             const message = err.response?.data?.message;
             setError(message);
@@ -24,5 +25,5 @@ export const useAdd = (url) => {
         }
     };
 
-    return { data, loading, error, postData };
+    return { data, loading, error, AddData };
 }

@@ -23,7 +23,7 @@ export default function Login() {
 
     useEffect(() => {
         if (data?.status) {
-            navigate("")
+            navigate("/product/list")
         }
     }, [data]);
 

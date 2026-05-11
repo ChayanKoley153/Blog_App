@@ -3,7 +3,10 @@ import { Component, lazy, Suspense } from 'react';
 import FormLoader from './components/loaderCom/loadercom';
 import { Toaster } from "sonner";
 import PostAdd from './pages/crud/post_add/postAdd';
-
+import { PostList } from './pages/crud/post_list/postList';
+import { PostDetails } from './pages/crud/post_details/postDetails';
+import { PostEdit } from './pages/crud/post_edit/postEdit';
+import { PostDelete } from './pages/crud/post_delete/postDelete';
 
 
 const Register = lazy(() => import('./pages/auth/signUp/register'));
@@ -32,8 +35,23 @@ function App() {
     {
       path: '/product/add',
       component: <PostAdd/>
+    },
+    {
+      path: '/product/list',
+      component: <PostList/>
+    },
+    {
+      path: '/product/details/:id',
+      component: <PostDetails />
+    },
+    {
+      path: '/product/edit/:id',
+      component: <PostEdit />
+    },
+    {
+      path: '/product/delete/:id',
+      component: <PostDelete />
     }
-    
   ]
 
   return (
