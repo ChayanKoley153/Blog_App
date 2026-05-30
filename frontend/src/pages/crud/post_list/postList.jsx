@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useList } from "../../../../customHooks/crudhooks/useList";
 import endPoints from "../../../../api/endpoints";
-import "./postList.css";
+import "./postlist.css";
 
 export const PostList = () => {
   const { id } = useParams();

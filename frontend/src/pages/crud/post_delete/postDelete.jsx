@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import endPoints from "../../../../api/endpoints";
 import { useDelete } from "../../../../customHooks/crudhooks/useDelete";
-import "./PostDelete.css";
+import "./postdelete.css";
 
 import {
     confirmDeleteAlert,
@@ -24,7 +24,8 @@ export const PostDelete = () => {
         if (result.isConfirmed) {
             const response = await deleteData();
             if (response) {
-                await successAlert(
+                await succes
+                sAlert(
                     "Deleted!",
                     "Your file has been deleted."
                 );

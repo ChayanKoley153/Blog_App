@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import endPoints from '../../../../api/endpoints';
-import "./postEdit.css";
+import "./postedit.css";
 import { useList } from '../../../../customHooks/crudhooks/useList';
 import { useUpdate } from '../../../../customHooks/crudhooks/useEdit';
 

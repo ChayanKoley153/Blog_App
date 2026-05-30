@@ -4,7 +4,7 @@ import { ProductValidator } from '../../../../validators/productValidator';
 import { useForm } from 'react-hook-form';
 import { useAdd } from '../../../../customHooks/crudhooks/useAdd';
 import endPoints from '../../../../api/endpoints';
-import './postAdd.css';
+import './postadd.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 
