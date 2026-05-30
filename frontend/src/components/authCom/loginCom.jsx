@@ -15,9 +15,6 @@ export const LoginCom = ({
     return (
         <form className="form" onSubmit={handleSubmit}>
             <h2>Login</h2>
-
-            {apiError && <span className="error">{apiError}</span>}
-
             <div className="form-group">
                 <input
                     className="input"

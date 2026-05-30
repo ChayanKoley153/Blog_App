@@ -1,22 +1,50 @@
 import React, { useState } from "react";
 import { FaEnvelope } from "react-icons/fa";
-import "./ForgotPassword.css";
-import { useForgotPassword } from "../../../../customHooks/authhooks/auth.password";
-
-
+import "./forgotPassword.css";
+import { useForgotPassword } from "../../../../customHooks/authhooks/auth.forgetPassword";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
 
     const { loading, sendResetLink } = useForgotPassword();
 
+    const validateEmail = (value) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!value.trim()) {
+            return "Email is required";
+        }
+
+        if (!emailRegex.test(value)) {
+            return "Please enter a valid email address";
+        }
+
+        return "";
+    };
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+
+        setEmail(value);
+        setError(validateEmail(value));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const validationError = validateEmail(email);
+
+        if (validationError) {
+            setError(validationError);
+            return;
+        }
 
         const success = await sendResetLink(email);
 
         if (success) {
             setEmail("");
+            setError("");
         }
     };
 
@@ -30,7 +58,8 @@ const ForgotPassword = () => {
                 <h2>Forgot Password?</h2>
 
                 <p className="subtitle">
-                    Enter your email address and we'll send you a password reset link.
+                    Enter your email address and we'll send
+                    you a password reset link.
                 </p>
 
                 <form onSubmit={handleSubmit}>
@@ -39,12 +68,23 @@ const ForgotPassword = () => {
                             type="email"
                             placeholder="Enter your email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={handleChange}
                         />
+
+                        {error && (
+                            <span className="error-text">
+                                {error}
+                            </span>
+                        )}
                     </div>
 
-                    <button type="submit" disabled={loading}>
-                        {loading ? "Sending..." : "Send Reset Link"}
+                    <button
+                        type="submit"
+                        disabled={loading}
+                    >
+                        {loading
+                            ? "Sending..."
+                            : "Send Reset Link"}
                     </button>
                 </form>
             </div>
